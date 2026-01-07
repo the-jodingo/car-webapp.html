@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odingo | Italian Excellence Since 1947</title>
+    
+    <!-- Google Fonts for that premium/sporty look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Oswald:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --odingo-red: #ff2800;
+            --odingo-black: #0f0f0f;
+            --odingo-dark-grey: #1a1a1a;
+            --odingo-light-grey: #e0e0e0;
+            --text-white: #ffffff;
+            --font-headline: 'Oswald', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+            --transition-speed: 0.4s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--odingo-black);
+            color: var(--text-white);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            font-family: var(--font-headline);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--odingo-red);
+            color: var(--text-white);
+        }
+
+        .btn-primary:hover {
+            background-color: #cc1f00;
+        }
+
+        .btn-outline {
+            border-color: var(--text-white);
+            color: var(--text-white);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--text-white);
+            color: var(--odingo-black);
+        }
+
+        .section-title {
+            font-family: var(--font-headline);
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--odingo-red);
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-headline);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-white);
+            text-transform: uppercase;
+            position: relative;
+            padding-left: 45px; /* Space for the rectangular placeholder */
+        }
+
+        /* The Odingo Logo Mark (CSS Rectangle) */
+        .logo::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            background-color: var(--odingo-red);
+            /* Using a gradient to simulate a shield look */
+            background: linear-gradient(135deg, #ff2800 0%, #cc1f00 100%);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links li a {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            opacity: 0.8;
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--odingo-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            opacity: 1;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-tools {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .tool-icon {
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Abstract sports car image */
+            background-image: url('https://picsum.photos/seed/sportscarRed/1920/1080'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            filter: brightness(0.6);
+            animation: zoomEffect 20s infinite alternate;
+        }
+
+        @keyframes zoomEffect {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 800px;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            color: var(--odingo-red);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .hero-title {
+            font-family: var(--font-headline);
+            font-size: 5rem;
+            line-height: 1;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* --- CAR RANGE (GRID) --- */
+        #range {
+            padding: 100px 0;
+            background-color: var(--odingo-black);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .car-card {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            background-color: var(--odingo-dark-grey);
+            cursor: pointer;
+            group: 1;
+        }
+
+        .car-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .car-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .car-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .car-card:hover .car-info {
+            transform: translateY(0);
+        }
+
+        .car-series {
+            color: var(--odingo-red);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .car-name {
+            font-family: var(--font-headline);
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .car-link {
+            font-size: 13px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .car-card:hover .car-link {
+            opacity: 1;
+        }
+
+        /* --- CONFIGURATOR STRIP --- */
+        #configurator-strip {
+            padding: 80px 0;
+            background-color: #121212;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .strip-content h3 {
+            font-family: var(--font-headline);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .strip-content p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* --- RACING / NEWS SECTION --- */
+        #racing {
+            padding: 100px 0;
+            background-color: var(--odingo-black);
+        }
+
+        .split-layout {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .split-image {
+            flex: 1 1 50%;
+            min-width: 300px;
+            height: 600px;
+            position: relative;
+        }
+
+        .split-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .red-badge {
+            position: absolute;
+            top: 40px;
+            left: -20px;
+            background-color: var(--odingo-red);
+            padding: 15px 30px;
+            font-family: var(--font-headline);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            z-index: 2;
+        }
+
+        .split-text {
+            flex: 1 1 50%;
+            padding: 60px;
+            background-color: #151515;
+            min-width: 300px;
+        }
+
+        .split-text h2 {
+            font-family: var(--font-headline);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .split-text p {
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--odingo-dark-grey);
+            padding: 80px 0 20px 0;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            font-family: var(--font-headline);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--odingo-red);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-icons span {
+            margin-left: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        
+        .social-icons span:hover {
+            color: var(--text-white);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--odingo-black);
+                flex-direction: column;
+                padding: 30px;
+                text-align: center;
+                border-bottom: 1px solid #333;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .split-layout {
+                flex-direction: column-reverse;
+            }
+            
+            .split-image {
+                width: 100%;
+                height: 300px;
+            }
+            
+            .red-badge {
+                top: 20px;
+                left: 0;
+                font-size: 1.2rem;
+                padding: 10px 20px;
+            }
+
+            #configurator-strip {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header id="navbar">
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">Odingo</a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#range">Cars</a></li>
+                <li><a href="#racing">Racing</a></li>
+                <li><a href="#">Brand</a></li>
+                <li><a href="#">Experience</a></li>
+                <li><a href="#">Dealers</a></li>
+            </ul>
+
+            <div class="nav-tools">
+                <span class="tool-icon" title="Search">&#128269;</span>
+                <span class="tool-icon" title="Dealer Locator">&#128205;</span>
+                <span class="tool-icon mobile-toggle" id="menuToggle">&#9776;</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <span class="hero-subtitle">The new hybrid V8</span>
+                <h1 class="hero-title">Odingo 296 GTB</h1>
+                <p class="hero-desc">Revolutionary Sports</p>
+                <a href="#range" class="btn btn-primary">Discover More</a>
+            </div>
+        </section>
+
+        <!-- Car Range Grid -->
+        <section id="range">
+            <div class="container">
+                <h2 class="section-title">The Range</h2>
+                <div class="grid-container">
+                    
+                    <!-- Card 1 -->
+                    <div class="car-card">
+                        <!-- Seeded random image for consistency -->
+                        <img src="https://picsum.photos/seed/ferrari1/600/800" alt="SF90 Stradale">
+                        <div class="car-info">
+                            <span class="car-series">Series Production</span>
+                            <h3 class="car-name">SF90 XX</h3>
+                            <div class="car-link">Discover <span>&rarr;</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="car-card">
+                        <img src="https://picsum.photos/seed/ferrari2/600/800" alt="Odingo 812">
+                        <div class="car-info">
+                            <span class="car-series">V12 Engine</span>
+                            <h3 class="car-name">Odingo 812</h3>
+                            <div class="car-link">Discover <span>&rarr;</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="car-card">
+                        <img src="https://picsum.photos/seed/ferrari3/600/800" alt="Purosangue">
+                        <div class="car-info">
+                            <span class="car-series">Four-Door Sport Car</span>
+                            <h3 class="car-name">Purosangue</h3>
+                            <div class="car-link">Discover <span>&rarr;</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Configurator Strip -->
+        <section id="configurator-strip">
+            <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; width: 100%;">
+                <div class="strip-content">
+                    <h3>Create Your Own</h3>
+                    <p>Configure your Odingo to match your style.</p>
+                </div>
+                <a href="#" class="btn btn-outline">Start Configuring</a>
+            </div>
+        </section>
+
+        <!-- Racing / Scuderia Section -->
+        <section id="racing">
+            <div class="container">
+                <div class="split-layout">
+                    <div class="split-image">
+                        <div class="red-badge">Scuderia Odingo</div>
+                        <img src="https://picsum.photos/seed/f1racecar/800/800" alt="F1 Car">
+                    </div>
+                    <div class="split-text">
+                        <h2>Formula 1 2024 Season</h2>
+                        <p>Relive the excitement of the Grand Prix. The relentless pursuit of perfection on the track continues as we push the boundaries of aerodynamics and speed.</p>
+                        <a href="#" class="btn btn-primary">Racing Hub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Models</h4>
+                    <ul>
+                        <li><a href="#">Sports Cars</a></li>
+                        <li><a href="#">GT Cars</a></li>
+                        <li><a href="#">Special Series</a></li>
+                        <li><a href="#">Concept Cars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Experience</h4>
+                    <ul>
+                        <li><a href="#">Museo Odingo</a></li>
+                        <li><a href="#">Driving Courses</a></li>
+                        <li><a href="#">Track Events</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Dealers</h4>
+                    <ul>
+                        <li><a href="#">Find a Dealer</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Financial Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Corporate</h4>
+                    <ul>
+                        <li><a href="#">Career</a></li>
+                        <li><a href="#">Investors</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Odingo S.p.A. All rights reserved.</p>
+                <div class="social-icons">
+                    <span title="Facebook">f</span>
+                    <span title="Instagram">in</span>
+                    <span title="Twitter">t</span>
+                    <span title="YouTube">yt</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple Interaction Scripts
+        
+        // 1. Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 2. Sticky Header Effect
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.padding = '0';
+                navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+            } else {
+                navbar.style.padding = '0';
+                navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+            }
+        });
+
+        // 3. Smooth Scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navLinks.classList.remove('active'); // Close mobile menu if open
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
